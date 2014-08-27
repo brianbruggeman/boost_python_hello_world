@@ -40,7 +40,8 @@ int main(int argc, char** argv)
     bp::object module(bp::handle<>(bp::borrowed(PyImport_AddModule("__main__"))));
     bp::object dictionary = module.attr("__dict__");
     bp::object data_obj = dictionary["data"];
-    // data = bp::extract<int>(data_obj);
+    // Error:  The following line seg-faults
+    data = bp::extract<int>(data_obj);
     std::cout << "data = " << data << std::endl;
     Py_Finalize();
     return 0;
