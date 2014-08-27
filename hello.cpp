@@ -26,57 +26,22 @@
 //
 // For more information, please refer to <http://unlicense.org>
 // ---------------------------------------------------------------------
-#include <boost/python/module.hpp>
-#include <boost/python/def.hpp>
 #include <boost/python.hpp>
 #include <iostream>
 
-
-//using namespace boost::python;
-using boost::python::def;
-using boost::python::object;
-using boost::python::dict;
-using boost::python::handle;
-using boost::python::extract;
-using boost::python::import;
-using boost::python::borrowed;
-using boost::python::error_already_set;
-using std::string;
-using std::cout;
-
-
-// C++ function to be embedded within python
-void say_hello(const char* name) {
-    cout << "Hello " <<  name << "!\n";
-}
-
-
-// Extending python
-BOOST_PYTHON_MODULE(say_hello) {
-    def("say_hello", say_hello);
-}
-
+namespace bp = boost::python;
 
 // Embedding python
 int main(int argc, char** argv)
 {
     int data = 0;
     Py_Initialize();
-    try {
-        PyRun_SimpleString("result = 5 ** 2.0");
-        PyRun_SimpleString("data = 5");
-        object module(handle<>(borrowed(PyImport_AddModule("__main__"))));
-        object dictionary = module.attr("__dict__");
-        object result = dictionary["result"];
-        object data = dictionary["data"];
-        data_value = extract<char*>(data);
-        // result_value = extract<float>(result);
-        std::cout << "5 ** 2 == " << result_value << std::endl;
-        dictionary["result"] = 20;
-        PyRun_SimpleString("print '5 ** 2 != %s' % (result)");
-    } catch (error_already_set& e) {
-        PyErr_Print();
-    }
+    PyRun_SimpleString("data = 1");
+    bp::object module(bp::handle<>(bp::borrowed(PyImport_AddModule("__main__"))));
+    bp::object dictionary = module.attr("__dict__");
+    bp::object data_obj = dictionary["data"];
+    // data = bp::extract<int>(data_obj);
+    std::cout << "data = " << data << std::endl;
     Py_Finalize();
     return 0;
 }
