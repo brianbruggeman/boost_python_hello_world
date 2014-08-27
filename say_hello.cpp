@@ -1,21 +1,21 @@
-#include <iostream>
+// Copyright 2014 Brian Bruggeman
+
 #include <boost/python/module.hpp>
 #include <boost/python/def.hpp>
-
-
-int main() {
-    return 0;
-}
+#include <iostream>
 
 
 void say_hello(const char* name) {
     std::cout << "Hello " <<  name << "!\n";
 }
 
-using namespace boost::python;
 
-BOOST_PYTHON_MODULE(say_hello)
-{
+using boost::python::def;
 
+BOOST_PYTHON_MODULE(say_hello) {
     def("say_hello", say_hello);
+}
+
+int main() {
+    return 0;
 }
