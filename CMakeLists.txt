@@ -18,3 +18,8 @@ target_link_libraries(
   ${Boost_LIBRARIES}
   ${PYTHON_LIBRARIES}
 )
+
+add_executable(hello say_hello.cpp)
+target_link_libraries(hello
+  ${Boost_LIBRARIES}
+  ${PYTHON_LIBRARIES})
