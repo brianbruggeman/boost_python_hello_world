@@ -1,0 +1,6 @@
+# Cmake project files
+CMakeFiles/
+Makefile
+*.cmake
+*.txt
+*.so
