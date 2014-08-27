@@ -3,6 +3,6 @@ from distutils.extension import Extension
 
 setup(name="PackageName",
     ext_modules=[
-        Extension("hello", ["say_hello.cpp"],
+        Extension("say_hello", ["say_hello.cpp"],
         libraries = ["boost_python"])
     ])
