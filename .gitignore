@@ -1,6 +1,7 @@
 # Cmake project files
 CMakeFiles/
 Makefile
+build/
 *.cmake
 *.txt
 *.so

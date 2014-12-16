@@ -69,8 +69,8 @@ int main(int argc, char** argv)
         object dictionary = module.attr("__dict__");
         object result = dictionary["result"];
         object data = dictionary["data"];
-        data_value = extract<char*>(data);
-        // result_value = extract<float>(result);
+        // char* data_value = extract<char*>(data);
+        float result_value = extract<float>(result);
         std::cout << "5 ** 2 == " << result_value << std::endl;
         dictionary["result"] = 20;
         PyRun_SimpleString("print '5 ** 2 != %s' % (result)");

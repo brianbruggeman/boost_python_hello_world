@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 2.8)
 
 FIND_PACKAGE(PythonInterp)
 FIND_PACKAGE(PythonLibs)
+set(PYTHON_LIBRARIES /usr/local/Frameworks/Python.framework/Versions/2.7/Python)
 FIND_PACKAGE(Boost COMPONENTS
                 system
                 thread
