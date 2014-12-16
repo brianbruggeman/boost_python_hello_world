@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 2.8)
 
 FIND_PACKAGE(PythonInterp)
 FIND_PACKAGE(PythonLibs)
+set(PYTHON_LIBRARIES /usr/local/Frameworks/Python.framework/Versions/2.7/Python)
 FIND_PACKAGE(Boost COMPONENTS
                 system
                 thread
@@ -18,3 +19,8 @@ target_link_libraries(
   ${Boost_LIBRARIES}
   ${PYTHON_LIBRARIES}
 )
+
+add_executable(hello say_hello.cpp)
+target_link_libraries(hello
+  ${Boost_LIBRARIES}
+  ${PYTHON_LIBRARIES})
