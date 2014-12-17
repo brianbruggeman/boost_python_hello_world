@@ -57,13 +57,10 @@ int main(int argc, char** argv)
         object module(handle<>(borrowed(PyImport_AddModule("__main__"))));
         object dictionary = module.attr("__dict__");
         object global(main.attr("__dict__"));
-        if (exists("hello.py")) {
-            object result = exec_file("hello.py", global, global);
-        } else {
-            hello("default");
-        }
+        object _hello = import("hello");
+        _hello.attr("hello")("Extensions");
     } catch (error_already_set& e) {
-        PyErr_Print();
+        hello("Default");
     }
     Py_Finalize();
     return 0;
