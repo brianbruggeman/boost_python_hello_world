@@ -26,10 +26,15 @@
 //
 // For more information, please refer to <http://unlicense.org>
 // ---------------------------------------------------------------------
+#include <iostream>
 #include <Python/Python.h>
 
 #include "hello.h"
 #include "boost_glue.h"
+
+using std::string;
+using std::cout;
+using std::endl;
 
 // Embedding python
 int main(int argc, char** argv)
@@ -38,16 +43,25 @@ int main(int argc, char** argv)
     Py_Initialize();
     try {
         object main = import("__main__");
+        // extract the path from the function
         object os = import("os");
+        object getcwd = os.attr("getcwd");
+        string local_path = extract<string>(getcwd());
+        // add local path to sys path
+        object sys = import("sys");
+        object sys_path = sys.attr("path");
+        sys_path.attr("insert")(0, local_path);
+        // look for local python version of function
         object path = os.attr("path");
         object exists = path.attr("exists");
         object module(handle<>(borrowed(PyImport_AddModule("__main__"))));
         object dictionary = module.attr("__dict__");
         object global(main.attr("__dict__"));
-        if (exists("test.py")) {
-            object result = exec_file("test.py", global, global);
+        if (exists("hello.py")) {
+            object result = exec_file("hello.py", global, global);
+        } else {
+            hello("default");
         }
-
     } catch (error_already_set& e) {
         PyErr_Print();
     }
