@@ -10,17 +10,27 @@ FIND_PACKAGE(Boost COMPONENTS
                 python
              REQUIRED)
 
-include_directories(${PYTHON_INCLUDE_DIRS} ${Boost_INCLUD_DIRS})
-link_directories(${PYTHON_LIBRARY_DIRS} ${Boost_LIBRARY_DIRS})
+include_directories(${PYTHON_INCLUDE_DIRS}
+                    ${Boost_INCLUD_DIRS}
+                    ${CMAKE_SOURCE_DIR})
 
-PYTHON_ADD_MODULE(say_hello say_hello.cpp)
-target_link_libraries(
-   say_hello
+link_directories(${PYTHON_LIBRARY_DIRS}
+                 ${Boost_LIBRARY_DIRS}
+                 ${CMAKE_SOURCE_DIR})
+
+PYTHON_ADD_MODULE(_hello
+    hello.cpp
+    main.cpp)
+
+target_link_libraries(_hello
   ${Boost_LIBRARIES}
   ${PYTHON_LIBRARIES}
+
 )
 
-add_executable(hello say_hello.cpp)
+add_executable(hello
+    hello.cpp
+    main.cpp)
 target_link_libraries(hello
   ${Boost_LIBRARIES}
   ${PYTHON_LIBRARIES})
