@@ -34,14 +34,18 @@
 #include "hello.h"
 
 //using namespace boost::python;
-using boost::python::def;
-using boost::python::object;
-using boost::python::dict;
-using boost::python::handle;
-using boost::python::extract;
-using boost::python::import;
-using boost::python::borrowed;
-using boost::python::error_already_set;
+namespace bp = boost::python;
+
+using bp::def;
+using bp::object;
+using bp::dict;
+using bp::handle;
+using bp::extract;
+using bp::import;
+using bp::borrowed;
+using bp::error_already_set;
+using bp::handle_exception;
+
 
 // Extending python
 BOOST_PYTHON_MODULE(_hello) {
